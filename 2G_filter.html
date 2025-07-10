@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Filtered GCELL Table</title>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        padding: 20px;
+      }
+      h2 {
+        color: #333;
+      }
+      #table_div {
+        margin-top: 20px;
+      }
+    </style>
+    <script>
+      google.charts.load('current', {'packages':['table']});
+      google.charts.setOnLoadCallback(drawTable);
+
+      function drawTable() {
+        const queryString = encodeURIComponent("SELECT * WHERE C = 'GCELL'");
+        
+        const query = new google.visualization.Query(
+          'https://docs.google.com/spreadsheets/d/e/2PACX-1vQ7p2LG1AAvsd1xZTNX6bhbDCPKWU7IecJhnbK3LMVh2tuNxwWEw_9YDzrAZyLEEw/pubhtml/gviz/tq?sheet=2G&headers=2&tq=' + queryString
+        );
+        
+        query.send(function(response) {
+          if (response.isError()) {
+            document.getElementById('table_div').innerHTML = 'Error: ' + response.getMessage();
+            return;
+          }
+
+          const data = response.getDataTable();
+          const table = new google.visualization.Table(document.getElementById('table_div'));
+          table.draw(data, {showRowNumber: false, width: '100%', height: 'auto'});
+        });
+      }
+    </script>
+  </head>
+  <body>
+    <h2>Filtered Data (Category = GCELL)</h2>
+    <div id="table_div">Loading...</div>
+  </body>
+</html>
