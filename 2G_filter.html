@@ -10,8 +10,8 @@
         const queryString = encodeURIComponent("SELECT *");
         
         const query = new google.visualization.Query(
-          'https://docs.google.com/spreadsheets/d/e/2PACX-1vQ7p2LG1AAvsd1xZTNX6bhbDCPKWU7IecJhnbK3LMVh2tuNxwWEw_9YDzrAZyLEEw/gviz/tq?sheet=2G&headers=2&tq=' + queryString
-        );
+  'https://docs.google.com/spreadsheets/d/e/2PACX-1vQ7p2LG1AAvsd1xZTNX6bhbDCPKWU7IecJhnbK3LMVh2tuNxwWEw_9YDzrAZyLEEw/gviz/tq?sheet=2G&headers=2&tq=' + queryString
+);
 
         query.send(function(response) {
           if (response.isError()) {
